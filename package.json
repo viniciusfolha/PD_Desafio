@@ -1,0 +1,24 @@
+{
+  "name": "catalogo",
+  "version": "1.0.0",
+  "description": "Um catalogo de discos musicais do desafio da empresa Passei Direto",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd react-client && npm start",
+    "server": "node server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+  },
+  "keywords": [
+    "node",
+    "react"
+  ],
+  "author": "Vinicius Folha",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql": "^2.16.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.6.1"
+  }
+}
