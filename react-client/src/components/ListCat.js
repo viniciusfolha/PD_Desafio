@@ -1,18 +1,30 @@
 import React from 'react'
 
+import RowCat from './RowCat'
+
 class ListCat extends React.Component {
 	
+	constructor(props) {
+	  super(props)
+	  this.state = {
+	    showResults: false,
+	  }
+	}
+
+	createProject() {
+		this.setState((state, props) => ({
+		  showResults: !state.showResults
+		}));
+	}
+
 	createList(collection){
 		return (
 			collection.map(el=>
-					<div style={{border: '1px solid gray', borderLeft: '6px solid blue', padding : '15px 30px', backgroundColor : "AliceBlue"}}>
-					<li key={el.ID.toString()}>
-					 <button className = 'bx--table-expand-v2__button'>+</button> {el.Name}
-					</li>
-				</div>
+				<RowCat algo = {el.ID} teste= {el.Name} />
 			)
 		);
 	}
+
 
 	render(){
 		return(

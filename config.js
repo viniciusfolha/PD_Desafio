@@ -6,7 +6,8 @@ const config = {
    host: 'localhost',
    user: 'novousuario',
    password : 'password',
-   database : 'catalogo'
+   database : 'catalogo',
+   connectionLimit: 10,
  }
 };
 
