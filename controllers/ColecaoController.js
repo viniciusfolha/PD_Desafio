@@ -18,6 +18,7 @@ ColecaoController.prototype.getById = function(request, response, next) {
 };
 
 ColecaoController.prototype.create = function(request, response, next) {
+  console.log("Algo");
   this.DbModel.create(request.body)
     .then(function(err, data) {
       response.json(data);
