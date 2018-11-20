@@ -1,5 +1,8 @@
+CREATE USER 'novousuario'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON * . * TO 'novousuario'@'localhost';
+FLUSH PRIVILEGES;
 
-DROP database catalogo;
+DROP database IF EXISTS catalogo;
 
 CREATE DATABASE IF NOT EXISTS catalogo;
 USE catalogo;
