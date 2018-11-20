@@ -44,7 +44,7 @@ class ListCat extends React.Component {
 				<div>
 					<ul>
 					  {this.state.colecoes.map(el=>
-					  		<RowCat collectionID = {el.ID} key = {el.ID} name= {el.Name} refreshCollectionList = {this.refreshCollectionList} />
+					  		<RowCat collectionID = {el.ID} key = {el.ID} name= {el.Name} refreshCollectionList = {this.refreshCollectionList} filter = {this.props.filter}/>
 							)
 					  }
 					</ul>

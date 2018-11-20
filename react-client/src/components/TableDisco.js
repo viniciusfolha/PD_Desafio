@@ -37,6 +37,14 @@ class TableDisco extends React.Component {
 	    return body;
 	}
 
+	filterDisc = (discFilter) => {
+	    let filteredDiscs = this.state.discs
+	    filteredDiscs = filteredDiscs.filter((disc) => {
+	      return (disc.Name.indexOf(discFilter) !== -1) || (disc.Description.indexOf(discFilter) !== -1) || (disc.Author.indexOf(discFilter) !== -1) ; 
+	    })
+	    return filteredDiscs;
+	}
+
 	onRemove(props){
 		if(window.confirm('Você quer remover o disco? ' + props.Name)){
 			fetch('/api/discos/' + props.ID, {
@@ -53,16 +61,18 @@ class TableDisco extends React.Component {
 			});
 		}
 	}
+
 	onEdit(props){
 		this.setState({discForm: props, isToEdit: true}, () => {this.hideModal(true)});
 	}
+
 	hideModal(val){
 		this.setState({showForm: val})
 	}
 
-	createList(discs){
+	createList(discsFiltered){
 		return (
-			discs.map(el=>
+			discsFiltered.map(el=>
 				<div key = {this.props.collectionID +'.'+ el.ID} className='divDiscCell'>
 				<div className = 'divDiscButton' >
 					<button className = 'editButton' onClick={(event) => this.onEdit(el)}>Edit</button>
@@ -82,9 +92,11 @@ class TableDisco extends React.Component {
 			discForm : {collectionID: this.props.collectionID}, 
 			isToEdit: false
 		};
+
+		var filteredDiscs = this.filterDisc(this.props.filter);
 		return(
 				<div className='divTableDisc'>
-					{this.createList(this.state.discs)}
+					{this.createList(filteredDiscs)}
 
 					{ (this.state.showForm) ? 
 						<Modal>

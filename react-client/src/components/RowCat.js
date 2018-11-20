@@ -43,7 +43,7 @@ class RowCat extends React.Component {
 					 	<strong>{this.props.name}</strong>
 					 	<button className = 'removeCollectionButton' onClick={() => this.onRemove(this.props)}> X </button>
 					</li>
-					 { this.state.showResults ? <TableDisco collectionID = {this.props.collectionID}/> : null }
+					 { this.state.showResults ? <TableDisco collectionID = {this.props.collectionID} filter = {this.props.filter}/> : null }
 				</div>
 			);
 	}
