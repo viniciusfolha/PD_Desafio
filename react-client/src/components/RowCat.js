@@ -22,25 +22,11 @@ class RowCat extends React.Component {
 	constructor(props) {
 	  super(props)
 	  this.state = {
-	    showResults: false,
-	    discs : []
+	    showResults: false
 	  }
 	}
 
-	callApi = async () => {
-	    const response = await fetch('/api/discos/' + this.props.id);
-	    const body = await response.json();
-	    if (response.status !== 200) throw Error(body.message);
-
-	    return body;
-	}
-
 	showMore() {
-		if(!this.state.showResults)
-			this.callApi()
-			  .then(res => this.setState({ discs: JSON.parse(res)}))
-			  .catch(err => console.log(err));
-
 		this.setState((state, props) => ({
 		  showResults: !state.showResults
 		}));
@@ -62,14 +48,15 @@ class RowCat extends React.Component {
 
 	render(){
 		return(
-				<div style={{border: '1px solid gray', borderLeft: '6px solid blue', padding : '15px 30px', backgroundColor : "AliceBlue"}}>			
+				<div style={{border: '1px solid gray', borderLeft: '6px solid slategrey', padding : '15px 30px', backgroundColor : "AliceBlue"}}>			
 					<li>
 					 	<button onClick={this.showMore.bind(this)} style = {buttonStyle} >
 					 		{this.state.showResults ? "v" : ">"}
-					 	</button> <strong>{this.props.name}</strong>
-					 	 <button style ={RemoveButtonStyle} onClick={() => this.onRemove(this.props)}> X </button>
+					 	</button>
+					 	<strong>{this.props.name}</strong>
+					 	<button style ={RemoveButtonStyle} onClick={() => this.onRemove(this.props)}> X </button>
 					</li>
-					 { this.state.showResults ? <TableDisco discs = {this.state.discs}/> : null }
+					 { this.state.showResults ? <TableDisco collectionID = {this.props.collectionID}/> : null }
 
 				</div>
 			);

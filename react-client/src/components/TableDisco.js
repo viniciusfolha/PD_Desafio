@@ -1,4 +1,7 @@
 import React from 'react'
+import Modal from './Modal.js'
+import DiscForm from './DiscForm.js'
+
 	const buttonStyle =  {
 	    display: "block",
 	    width: "100%",
@@ -43,25 +46,63 @@ import React from 'react'
 	}
 class TableDisco extends React.Component {
 
-	createList(discs){
-		var disc = discs[0];
-		var ownProperties = [];
-		if(disc !== undefined){
-			for (var prop in disc) {
-			    if (disc.hasOwnProperty(prop)) {
-			        ownProperties.push(prop);
-			    }else{
-			    	console.log(prop);
-			    }
-			}
+	constructor(props) {
+	  super(props)
+	  this.state = {
+	    showForm: false,
+	    isToEdit: false,
+	    discs : [],
+	    discForm : {}
+	  }
+	  this.hideModal = this.hideModal.bind(this);
+	  this.refreshDiscsList = this.refreshDiscsList.bind(this);
+	  this.onEdit = this.onEdit.bind(this);
+	}
+
+	componentDidMount() {
+		this.refreshDiscsList();
+	}
+
+	refreshDiscsList(){
+		this.getDiscsById(this.props.collectionID)
+		.then(res => this.setState({ discs: JSON.parse(res)}))
+		.catch(err => console.log(err));
+	}
+
+	getDiscsById = async (id) => {
+	    const response = await fetch('/api/discos/' + id);
+	    const body = await response.json();
+	    if (response.status !== 200) throw Error(body.message);
+	    return body;
+	}
+
+	onRemove(props){
+		if(window.confirm('Você quer remover o disco? ' + props.Name)){
+			fetch('/api/discos/' + props.ID, {
+			   method: "DELETE"		   
+			})
+			.then((response)=>{
+				this.refreshDiscsList();
+			})
+			.catch(function(error) {
+			    alert('Error ' + error);
+			});
 		}
-		
+	}
+	onEdit(props){
+		this.setState({discForm: props, isToEdit: true}, () => {this.hideModal(true)});
+	}
+	hideModal(val){
+		this.setState({showForm: val})
+	}
+
+	createList(discs){
 		return (
 			discs.map(el=>
-				<div style={{border: '1px solid gray', borderLeft: '6px solid blue', padding : '5px 15px', backgroundColor : "Cornsilk"}}>
+				<div key = {this.props.collectionID +'.'+ el.ID} style={{border: '1px solid gray', borderLeft: '4px solid slategrey', padding : '5px 15px', backgroundColor : "Cornsilk"}}>
 				<div style = {divButtons} >
-					<button style = {editButtonStyle}>Edit</button>
-					<button style = {deleteButtonStyle}>Remove</button>
+					<button style = {editButtonStyle} onClick={(event) => this.onEdit(el)}>Edit</button>
+					<button style = {deleteButtonStyle} onClick={(event) => this.onRemove(el)}>Remove</button>
 				</div>
 				<h3><strong>Nome:</strong> {el.Name}</h3>
 				<p><strong>Author:</strong> {el.Author}</p>
@@ -73,10 +114,22 @@ class TableDisco extends React.Component {
 	}
 
 	render(){
+		let newDisc = {
+			discForm : {collectionID: this.props.collectionID}, 
+			isToEdit: false
+		};
 		return(
 				<div style={{ padding : '2px 30px'}}>
-					{this.createList(this.props.discs)}
-					<div style = {buttonStyle} ><button style = {buttonStyle}>Novo Disco</button> 	</div>
+					{this.createList(this.state.discs)}
+
+					{ (this.state.showForm) ? 
+						<Modal>
+							<DiscForm hideModal = {this.hideModal} refreshDiscsList = {this.refreshDiscsList} disc = {this.state.discForm} isToEdit = {this.state.isToEdit}/>
+						 </Modal>
+						 : null
+					}
+
+					<button style = {buttonStyle} onClick={() => {this.setState(newDisc);this.hideModal(true)}}> Novo Disco </button> 
 				</div>
 			);
 	}

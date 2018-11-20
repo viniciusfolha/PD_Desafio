@@ -13,18 +13,10 @@ const port = process.env.PORT || config.app.port;
 // router
 app.use('/', router);
 
-/*
-app.get('/api/discos', (req, res, next) => {
-	db.query('SELECT * FROM Discos')
-        .then((results) => {console.log(results); res.json(JSON.stringify(results));})
-        .catch((err) => {console.log(err);res.json(error)});
-	//res.send({ express: 'Hello From Express' });
-});
 
-app.get('/api/colecoes', (req, res, next) => {
-  execSQLQuery('SELECT * FROM Colecoes', res);
-});
-*/
+app.use(logErrors);
+app.use(errorHandler);
+
 app.use(function(err, req, res, next){
 
     if(err.status != null) {
@@ -37,34 +29,14 @@ app.use(function(err, req, res, next){
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
-/*
-function execSQLQuery(sqlQry, res){
-  const connection = mysql.createConnection(config.db);
-  var  connectionPromise = Bluebird.promisifyAll(connection);
-  connectionPromise.queryAsync(sqlQry)
-    .then(function(res){
-        res.json(JSON.stringify(results));
-    })
-    .catch((err) => {
-        res.json(error);
-    })
-    .then((result)=> {
-        console.log(results);
-        connection.end();
-    });
-
-};
 
 
-  function execSQLQuery(sqlQry, res){
-  const connection = mysql.createConnection(config.db);
-  
-  connection.query(sqlQry, function(error, results, fields){
-      if(error) 
-        res.json(error);
-      else
-        res.json(JSON.stringify(results));
-      console.log(results);
-      connection.end();
-  });
-  */
+function logErrors(err, req, res, next) {
+  console.error(err.stack);
+  next(err);
+}
+
+function errorHandler(err, req, res, next) {
+  res.status(500);
+  res.render('error', { error: err });
+}

@@ -46,27 +46,18 @@ class ListCat extends React.Component {
 	  return body;
 	};
 
-	createListCollection(collection){
-		return (
-			collection.map(el=>
-				<RowCat id = {el.ID} name= {el.Name} refreshCollectionList = {this.refreshCollectionList} />
-			)
-		);
-	}
-
 	hideModal(val){
-		this.setState({showForm: false})
-	}
-
-	createCollectionForm(showForm){
-		this.setState({showForm: showForm});
+		this.setState({showForm: val})
 	}
 
 	render(){
 		return(
 				<div>
 					<ul>
-					  {this.createListCollection(this.state.colecoes)}
+					  {this.state.colecoes.map(el=>
+					  		<RowCat collectionID = {el.ID} key = {el.ID} name= {el.Name} refreshCollectionList = {this.refreshCollectionList} />
+							)
+					  }
 					</ul>
 
 					{ (this.state.showForm) ? 
@@ -76,7 +67,7 @@ class ListCat extends React.Component {
 						 : null
 					}
 
-					<button style = {buttonStyle} onClick={() => this.createCollectionForm(true)} >
+					<button style = {buttonStyle} onClick={() => this.hideModal(true)} >
 						Nova Coleção
 					</button>
 				</div>

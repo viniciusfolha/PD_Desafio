@@ -25,6 +25,7 @@ DiscoController.prototype.getById = function(request, response, next) {
 };
 
 DiscoController.prototype.create = function(request, response, next) {
+  console.log(request.body);
   this.DbModel.create(request.body)
     .then(function(err, data) {
       response.json(data);
@@ -33,6 +34,7 @@ DiscoController.prototype.create = function(request, response, next) {
 };
 
 DiscoController.prototype.remove = function(request, response, next) {
+  console.log(request.params);
   var _id = request.params._id;
   this.DbModel.remove(_id)
     .then(function(err, data) {
@@ -44,6 +46,8 @@ DiscoController.prototype.remove = function(request, response, next) {
 DiscoController.prototype.update = function(request, response, next) {
   var _id = request.params._id,
       body = request.body;
+      console.log(_id);
+       console.log(body);
   this.DbModel.update(_id, body)
     .then(function(err, data) {
       response.json(data);
