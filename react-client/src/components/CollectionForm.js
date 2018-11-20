@@ -1,4 +1,5 @@
 import React from 'react'
+import './css/ButtonsStyle.css';
 
 class CollectionForm extends React.Component {
 	constructor(props) {
@@ -41,8 +42,8 @@ class CollectionForm extends React.Component {
 					<h2>Nova Coleção</h2>
 					Nome: <input name ="name" value = {this.state.name} onChange = {this.onChange} type = "text"/>
 					<br/>
-					<button onClick={this.onSubmit}> Enviar </button>
-					<button onClick={this.hideModal}> Close	</button>
+					<button className = 'acceptButton'  onClick={this.onSubmit}> Criar </button>
+					<button className = 'closeButton' onClick={this.hideModal}> Cancelar	</button>
 				</div>
 			);
 	}

@@ -1,8 +1,8 @@
 import React from 'react'
 import Modal from './Modal.js'
 import DiscForm from './DiscForm.js'
-import './ButtonsStyle.css';
-import './DivsStyle.css'
+import './css/ButtonsStyle.css';
+import './css/DivsStyle.css'
 
 
 class TableDisco extends React.Component {

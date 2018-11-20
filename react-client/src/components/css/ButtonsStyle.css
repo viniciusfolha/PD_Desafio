@@ -43,7 +43,7 @@
 
 .removeCollectionButton{
     border: none;
-    background-color: red;
+    background-color: #dc3545;
     padding: 14px 14px;
     border-radius: 5px;
     color: GhostWhite;
@@ -63,3 +63,23 @@
     color: GhostWhite;
     font-size : 20px
 }
+
+.acceptButton{
+	    background-color: #4CAF50;
+	    padding: 0px 10px;
+	    cursor: pointer;
+	    text-align: center;
+	    border-radius: 8px;
+	    color: GhostWhite;
+	    font-size : 15px
+	}
+
+.closeButton{
+	    background-color: #dc3545;
+	    padding: 0px 10px;
+	    cursor: pointer;
+	    text-align: center;
+	    border-radius: 8px;
+	    color: GhostWhite;
+	    font-size : 15px
+	}

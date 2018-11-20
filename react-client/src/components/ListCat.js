@@ -3,7 +3,7 @@ import React from 'react'
 import RowCat from './RowCat'
 import Modal from './Modal'
 import CollectionForm from './CollectionForm'
-import './ButtonsStyle.css'
+import './css/ButtonsStyle.css'
 
 class ListCat extends React.Component {
 	

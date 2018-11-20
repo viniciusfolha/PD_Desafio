@@ -1,4 +1,5 @@
 import React from 'react'
+import './css/ButtonsStyle.css';
 
 class DiscForm extends React.Component {
 	constructor(props) {
@@ -69,8 +70,8 @@ class DiscForm extends React.Component {
 						Data: <input name ="published" value = {this.state.published} onChange = {this.onChange} type = "date"/><br/>
 						Descrição: <textarea name ="description" value = {this.state.description} onChange = {this.onChange} />
 					</form>
-					<button onClick={this.onSubmit}> Enviar </button>
-					<button onClick={() => this.props.hideModal(false)}> Close	</button>
+					<button className = 'acceptButton' onClick={this.onSubmit}> Criar </button>
+					<button className = 'closeButton' onClick={() => this.props.hideModal(false)}> Cancelar	</button>
 				</div>
 			);
 	}

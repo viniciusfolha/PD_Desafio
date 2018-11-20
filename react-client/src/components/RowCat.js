@@ -1,7 +1,7 @@
 import React from 'react'
 import TableDisco from './TableDisco'
-import './ButtonsStyle.css'
-import './DivsStyle.css'
+import './css/ButtonsStyle.css'
+import './css/DivsStyle.css'
 
 class RowCat extends React.Component {
 	constructor(props) {
