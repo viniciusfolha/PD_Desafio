@@ -1,23 +1,8 @@
 import React from 'react'
-
 import TableDisco from './TableDisco'
-const buttonStyle =  {
-    border: "none",
-    backgroundColor: "#4CAF50",
-    padding: "14px 14px",
-    borderRadius: "5px",
-    color: "GhostWhite",
-    fontSize : "20px"
-}
-const RemoveButtonStyle =  {
-    border: "none",
-    backgroundColor: "red",
-    padding: "14px 14px",
-    borderRadius: "5px",
-    color: "GhostWhite",
-    fontSize : "10px",	
-    float: "right"
-}
+import './ButtonsStyle.css'
+import './DivsStyle.css'
+
 class RowCat extends React.Component {
 	constructor(props) {
 	  super(props)
@@ -34,10 +19,12 @@ class RowCat extends React.Component {
 
 	onRemove(props){
 		if(window.confirm('Você quer remover a coleção? ' + props.name)){
-			fetch('/api/colecoes/' + props.id, {
+			fetch('/api/colecoes/' + props.collectionID, {
 			   method: "DELETE"		   
 			})
 			.then(function(response){
+				if(!response.ok)
+					throw new Error(response.statusText)
 				props.refreshCollectionList();
 			})
 			.catch(function(error) {
@@ -48,16 +35,15 @@ class RowCat extends React.Component {
 
 	render(){
 		return(
-				<div style={{border: '1px solid gray', borderLeft: '6px solid slategrey', padding : '15px 30px', backgroundColor : "AliceBlue"}}>			
+				<div className='divCollection'>			
 					<li>
-					 	<button onClick={this.showMore.bind(this)} style = {buttonStyle} >
+					 	<button className = 'showMoreButton' onClick={this.showMore.bind(this)} >
 					 		{this.state.showResults ? "v" : ">"}
 					 	</button>
 					 	<strong>{this.props.name}</strong>
-					 	<button style ={RemoveButtonStyle} onClick={() => this.onRemove(this.props)}> X </button>
+					 	<button className = 'removeCollectionButton' onClick={() => this.onRemove(this.props)}> X </button>
 					</li>
 					 { this.state.showResults ? <TableDisco collectionID = {this.props.collectionID}/> : null }
-
 				</div>
 			);
 	}

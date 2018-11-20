@@ -1,49 +1,10 @@
 import React from 'react'
 import Modal from './Modal.js'
 import DiscForm from './DiscForm.js'
+import './ButtonsStyle.css';
+import './DivsStyle.css'
 
-	const buttonStyle =  {
-	    display: "block",
-	    width: "100%",
-	    border: "none",
-	    backgroundColor: "#4CAF50",
-	    padding: "5px 5px",
-	    cursor: "pointer",
-	    textAlign: "center",
-	    borderRadius: "15px",
-	    color: "GhostWhite",
-	    fontSize : "20px"
-	}
-	const divButtons =  {
-		display: "block",
-	    width: "100%",
-	    backgroundColor: "Cornsilk",
-	    padding: "0px 0px",
-	    cursor: "pointer",
-	    textAlign: "right",
-	    borderRadius: "8px",
-	    color: "GhostWhite",
-	    fontSize : "15px"
-	}
-	const editButtonStyle =  {
-	    backgroundColor: "#ffc107",
-	    padding: "0px 10px",
-	    cursor: "pointer",
-	    textAlign: "center",
-	    borderRadius: "8px",
-	    color: "GhostWhite",
-	    fontSize : "15px"
-	}
 
-	const deleteButtonStyle =  {
-	    backgroundColor: "#dc3545",
-	    padding: "0px 10px",
-	    cursor: "pointer",
-	    textAlign: "center",
-	    borderRadius: "8px",
-	    color: "GhostWhite",
-	    fontSize : "15px"
-	}
 class TableDisco extends React.Component {
 
 	constructor(props) {
@@ -82,6 +43,9 @@ class TableDisco extends React.Component {
 			   method: "DELETE"		   
 			})
 			.then((response)=>{
+				if(!response.ok) {
+					throw new Error('Network response was not ok.');
+				}
 				this.refreshDiscsList();
 			})
 			.catch(function(error) {
@@ -99,10 +63,10 @@ class TableDisco extends React.Component {
 	createList(discs){
 		return (
 			discs.map(el=>
-				<div key = {this.props.collectionID +'.'+ el.ID} style={{border: '1px solid gray', borderLeft: '4px solid slategrey', padding : '5px 15px', backgroundColor : "Cornsilk"}}>
-				<div style = {divButtons} >
-					<button style = {editButtonStyle} onClick={(event) => this.onEdit(el)}>Edit</button>
-					<button style = {deleteButtonStyle} onClick={(event) => this.onRemove(el)}>Remove</button>
+				<div key = {this.props.collectionID +'.'+ el.ID} className='divDiscCell'>
+				<div className = 'divDiscButton' >
+					<button className = 'editButton' onClick={(event) => this.onEdit(el)}>Edit</button>
+					<button className = 'deleteDiscButton' onClick={(event) => this.onRemove(el)}>Remove</button>
 				</div>
 				<h3><strong>Nome:</strong> {el.Name}</h3>
 				<p><strong>Author:</strong> {el.Author}</p>
@@ -119,17 +83,17 @@ class TableDisco extends React.Component {
 			isToEdit: false
 		};
 		return(
-				<div style={{ padding : '2px 30px'}}>
+				<div className='divTableDisc'>
 					{this.createList(this.state.discs)}
 
 					{ (this.state.showForm) ? 
 						<Modal>
-							<DiscForm hideModal = {this.hideModal} refreshDiscsList = {this.refreshDiscsList} disc = {this.state.discForm} isToEdit = {this.state.isToEdit}/>
+							<DiscForm hideModal = {this.hideModal} refreshDiscsList = {this.refreshDiscsList} 
+							disc = {this.state.discForm} isToEdit = {this.state.isToEdit}/>
 						 </Modal>
 						 : null
 					}
-
-					<button style = {buttonStyle} onClick={() => {this.setState(newDisc);this.hideModal(true)}}> Novo Disco </button> 
+					<button className="createDiscButton" onClick={() => {this.setState(newDisc);this.hideModal(true)}}> Novo Disco </button> 
 				</div>
 			);
 	}

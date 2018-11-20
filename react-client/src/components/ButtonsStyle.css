@@ -1,0 +1,65 @@
+
+.createDiscButton{
+	    display: block;
+	    width: 100%;
+	    border: none;
+	    background-color: #4CAF50;
+	    padding: 5px 5px;
+	    cursor: pointer;
+	    text-align: center;
+	    border-radius: 15px;
+	    color: GhostWhite;
+	    font-size : 20px
+	}
+
+.editButton{
+	    background-color: #ffc107;
+	    padding: 0px 10px;
+	    cursor: pointer;
+	    text-align: center;
+	    border-radius: 8px;
+	    color: GhostWhite;
+	    font-size : 15px
+	}
+
+.deleteDiscButton{
+	    background-color: #dc3545;
+	    padding: 0px 10px;
+	    cursor: pointer;
+	    text-align: center;
+	    border-radius: 8px;
+	    color: GhostWhite;
+	    font-size : 15px
+	}
+
+.showMoreButton{
+    border: none;
+    background-color: #4CAF50;
+    padding: 14px 14px;
+    border-radius: 5px;
+    color: GhostWhite;
+    font-size : 20px
+}
+
+.removeCollectionButton{
+    border: none;
+    background-color: red;
+    padding: 14px 14px;
+    border-radius: 5px;
+    color: GhostWhite;
+    font-size : 10px;	
+    float: right
+}
+
+.createCollectionButton{
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: SlateGrey;
+    padding: 7px 7px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 15px;
+    color: GhostWhite;
+    font-size : 20px
+}

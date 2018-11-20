@@ -1,0 +1,29 @@
+.divDiscButton{
+		display: block;
+	    width: 100%;
+	    background-color: Cornsilk;
+	    padding: 0px 0px;
+	    cursor: pointer;
+	    text-align: right;
+	    border-radius: 8px;
+	    color: GhostWhite;
+	    font-size : 15px
+	}
+
+.divDiscCell{
+	border: 1px solid gray;
+	border-left: 4px solid slategrey;
+	padding : 5px 15px;
+	background-color : Cornsilk
+}
+
+.divTableDisc{ 
+	padding : 2px 15px
+	}
+
+.divCollection{
+	border: 1px solid gray; 
+	border-left: 4px solid slategrey; 
+	padding : 5px 30px; 
+	background-color : AliceBlue
+}

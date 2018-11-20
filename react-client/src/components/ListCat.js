@@ -3,18 +3,7 @@ import React from 'react'
 import RowCat from './RowCat'
 import Modal from './Modal'
 import CollectionForm from './CollectionForm'
-const buttonStyle =  {
-    display: "block",
-    width: "100%",
-    border: "none",
-    backgroundColor: "SlateGrey",
-    padding: "7px 7px",
-    cursor: "pointer",
-    textAlign: "center",
-    borderRadius: "15px",
-    color: "GhostWhite",
-    fontSize : "20px"
-}
+import './ButtonsStyle.css'
 
 class ListCat extends React.Component {
 	
@@ -67,7 +56,7 @@ class ListCat extends React.Component {
 						 : null
 					}
 
-					<button style = {buttonStyle} onClick={() => this.hideModal(true)} >
+					<button className ='createCollectionButton' onClick={() => this.hideModal(true)} >
 						Nova Coleção
 					</button>
 				</div>

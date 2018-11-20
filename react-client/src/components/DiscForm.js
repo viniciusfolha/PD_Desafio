@@ -37,8 +37,7 @@ class DiscForm extends React.Component {
 			url = '/api/discos';
 			method = 'POST';
 		};
-		console.log(url);
-		console.log(method);
+
 		fetch(url, {
 		   method: method,
 		   headers: {'Content-Type': 'application/json', "Access-Control-Allow-Origin": "*"},

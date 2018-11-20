@@ -1,6 +1,3 @@
-CREATE USER 'novousuario'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON * . * TO 'novousuario'@'localhost';
-FLUSH PRIVILEGES;
 
 DROP database catalogo;
 
@@ -25,7 +22,7 @@ CREATE TABLE IF NOT EXISTS Discos (
 	CONSTRAINT PK_Discos PRIMARY KEY (ID),
 	CONSTRAINT FK_DiscoColecao FOREIGN KEY (ColecaoID) 
 		REFERENCES Colecoes(ID) 
-		ON DELETE SET NULL 
+		ON DELETE CASCADE
 		ON UPDATE CASCADE 
 	)ENGINE=InnoDB;
 
