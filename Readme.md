@@ -24,7 +24,7 @@ source initial_table.sql
 ```
 
 
-### Installing
+### Installing and Running
 
 Na pasta do package.json do Node.js rode o comando abaixo:
 
