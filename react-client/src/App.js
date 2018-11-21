@@ -4,34 +4,30 @@ import './App.css';
 
 import HeaderCat from './components/HeaderCat';
 import TableCollection from './components/TableCollection';
-
-
-const FilterContext = React.createContext({filter: ''})
+import {FilterContext} from './components/FilterContext';
 
 class App extends Component {
-	state = {
-		filter: ''
+	constructor(props) {
+	  super(props);
+
+	  this.onChange = (event) =>{
+	  	this.setState({[event.target.name]: event.target.value.substring(0, 30)}, );
+	  };
+
+	  this.state = {
+	  	filter: '',
+	  	onChange: this.onChange,
+	  }
 	}
-	changeFilter = filter => this.setState({filter});
 
 	render() {
-		const {changeFilter} = this
-		const value = {...this.state,changeFilter}
 		return (
-			<div>
-				<FilterContext.Provider value={value}>
-					<FilterContext.Consumer>
-					{
-						({ changeFilter, filter }) => (
-							<Fragment>
-								<HeaderCat {...{changeFilter}}/>
-								<TableCollection {...{filter}}/>
-							</Fragment>
-						)
-					}
-					</FilterContext.Consumer>
-				</FilterContext.Provider>
-			</div>
+			<FilterContext.Provider value={this.state}>
+				<div>				
+					<HeaderCat/>
+					<TableCollection/>
+				</div>
+			</FilterContext.Provider>
 		);
 	}
 }

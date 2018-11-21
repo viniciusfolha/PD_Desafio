@@ -43,11 +43,9 @@ class TableCollection extends React.Component {
 				<div>
 					<ul>
 					  {this.state.colecoes.map(el=>
-					  		<RowCollection collectionID = {el.ID} key = {el.ID} name= {el.Name} refreshCollectionList = {this.refreshCollectionList} filter = {this.props.filter}/>
-							)
-					  }
+					  		<RowCollection collectionID = {el.ID} key = {el.ID} name= {el.Name} refreshCollectionList = {this.refreshCollectionList}/>
+					  )}
 					</ul>
-
 					{ (this.state.showForm) ? 
 						<Modal>
 							<CollectionForm showModal = {this.hideModal} refreshCollectionList = {this.refreshCollectionList}/>

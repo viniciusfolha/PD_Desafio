@@ -75,7 +75,7 @@ class TableDisc extends React.Component {
 	createDiscsRow(discsFiltered){
 		return (
 			discsFiltered.map(el=>	(
-				<RowDisc disc = {el} collectionID = {this.props.collectionID} onEdit = {this.onEdit} onRemove = {this.onRemove}/>
+				<RowDisc key = {this.props.collectionID + '.' + el.ID} disc = {el} collectionID = {this.props.collectionID} onEdit = {this.onEdit} onRemove = {this.onRemove}/>
 				))
 		);
 	}
@@ -86,7 +86,7 @@ class TableDisc extends React.Component {
 			isToEdit: false
 		};
 
-		var filteredDiscs = this.filterDisc(this.props.filter);
+		var filteredDiscs = (this.props.filter ==='' || this.props.filter===undefined)? this.state.discs : this.filterDisc(this.props.filter);
 		return(
 				<div className='divTableDisc'>
 					{this.createDiscsRow(filteredDiscs)}
