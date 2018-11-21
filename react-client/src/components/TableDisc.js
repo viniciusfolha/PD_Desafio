@@ -1,11 +1,12 @@
 import React from 'react'
 import Modal from './Modal.js'
 import DiscForm from './DiscForm.js'
-import './css/ButtonsStyle.css';
+import RowDisc from './RowDisc.js'
+import './css/ButtonsStyle.css'
 import './css/DivsStyle.css'
 
 
-class TableDisco extends React.Component {
+class TableDisc extends React.Component {
 
 	constructor(props) {
 	  super(props)
@@ -18,6 +19,7 @@ class TableDisco extends React.Component {
 	  this.hideModal = this.hideModal.bind(this);
 	  this.refreshDiscsList = this.refreshDiscsList.bind(this);
 	  this.onEdit = this.onEdit.bind(this);
+	  this.onRemove = this.onRemove.bind(this);
 	}
 
 	componentDidMount() {
@@ -25,12 +27,12 @@ class TableDisco extends React.Component {
 	}
 
 	refreshDiscsList(){
-		this.getDiscsById(this.props.collectionID)
+		this.getDiscsByCollectionId(this.props.collectionID)
 		.then(res => this.setState({ discs: JSON.parse(res)}))
 		.catch(err => console.log(err));
 	}
 
-	getDiscsById = async (id) => {
+	getDiscsByCollectionId = async (id) => {
 	    const response = await fetch('/api/discos/' + id);
 	    const body = await response.json();
 	    if (response.status !== 200) throw Error(body.message);
@@ -70,20 +72,11 @@ class TableDisco extends React.Component {
 		this.setState({showForm: val})
 	}
 
-	createList(discsFiltered){
+	createDiscsRow(discsFiltered){
 		return (
-			discsFiltered.map(el=>
-				<div key = {this.props.collectionID +'.'+ el.ID} className='divDiscCell'>
-				<div className = 'divDiscButton' >
-					<button className = 'editButton' onClick={(event) => this.onEdit(el)}>Edit</button>
-					<button className = 'deleteDiscButton' onClick={(event) => this.onRemove(el)}>Remove</button>
-				</div>
-				<h3><strong>Nome:</strong> {el.Name}</h3>
-				<p><strong>Author:</strong> {el.Author}</p>
-				<p><strong>Published:</strong> {el.Published}</p>
-				<p><strong>Description:</strong> {el.Description}</p>
-				</div>
-			)
+			discsFiltered.map(el=>	(
+				<RowDisc disc = {el} collectionID = {this.props.collectionID} onEdit = {this.onEdit} onRemove = {this.onRemove}/>
+				))
 		);
 	}
 
@@ -96,7 +89,7 @@ class TableDisco extends React.Component {
 		var filteredDiscs = this.filterDisc(this.props.filter);
 		return(
 				<div className='divTableDisc'>
-					{this.createList(filteredDiscs)}
+					{this.createDiscsRow(filteredDiscs)}
 
 					{ (this.state.showForm) ? 
 						<Modal>
@@ -111,4 +104,4 @@ class TableDisco extends React.Component {
 	}
 }
 
-export default TableDisco;
+export default TableDisc;

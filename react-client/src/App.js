@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import HeaderCat from './components/HeaderCat';
-import ListCat from './components/ListCat';
+import TableCollection from './components/TableCollection';
 
 
 const FilterContext = React.createContext({filter: ''})
@@ -25,7 +25,7 @@ class App extends Component {
 						({ changeFilter, filter }) => (
 							<Fragment>
 								<HeaderCat {...{changeFilter}}/>
-								<ListCat {...{filter}}/>
+								<TableCollection {...{filter}}/>
 							</Fragment>
 						)
 					}

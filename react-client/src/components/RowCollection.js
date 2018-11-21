@@ -1,9 +1,9 @@
 import React from 'react'
-import TableDisco from './TableDisco'
+import TableDisc from './TableDisc'
 import './css/ButtonsStyle.css'
 import './css/DivsStyle.css'
 
-class RowCat extends React.Component {
+class RowCollection extends React.Component {
 	constructor(props) {
 	  super(props)
 	  this.state = {
@@ -35,7 +35,7 @@ class RowCat extends React.Component {
 
 	render(){
 		return(
-				<div className='divCollection'>			
+				<div className='divCollection'>		
 					<li>
 					 	<button className = 'showMoreButton' onClick={this.showMore.bind(this)} >
 					 		{this.state.showResults ? "v" : ">"}
@@ -43,10 +43,10 @@ class RowCat extends React.Component {
 					 	<strong>{this.props.name}</strong>
 					 	<button className = 'removeCollectionButton' onClick={() => this.onRemove(this.props)}> X </button>
 					</li>
-					 { this.state.showResults ? <TableDisco collectionID = {this.props.collectionID} filter = {this.props.filter}/> : null }
+					 { this.state.showResults ? <TableDisc collectionID = {this.props.collectionID} filter = {this.props.filter}/> : null }
 				</div>
 			);
 	}
 }
 
-export default RowCat;
+export default RowCollection;

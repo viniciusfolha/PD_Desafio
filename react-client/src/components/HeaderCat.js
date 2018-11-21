@@ -15,16 +15,12 @@ class HeaderCat extends React.Component {
 	render(){
 		return(
 				<div style={{ padding : '15px 30px'}}>
-					<h1 style={titleText}>Catálogo</h1>
+					<h1 className = 'titleHeaderCatalog'>Catálogo</h1>
 					<input style={{float: "right"}}name ="search" value = {this.state.search} onChange = {this.onChange} type = "text"/>
 				</div>
 			);
 	}
 }
-const titleText =  {
-    fontSize: 20,
-    fontWeight: 'bold',
-    display: 'inline'
-  };
+
 
 export default HeaderCat;

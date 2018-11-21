@@ -1,11 +1,10 @@
 import React from 'react'
-
-import RowCat from './RowCat'
+import RowCollection from './RowCollection'
 import Modal from './Modal'
 import CollectionForm from './CollectionForm'
 import './css/ButtonsStyle.css'
 
-class ListCat extends React.Component {
+class TableCollection extends React.Component {
 	
 	constructor(props) {
 	  super(props)
@@ -44,7 +43,7 @@ class ListCat extends React.Component {
 				<div>
 					<ul>
 					  {this.state.colecoes.map(el=>
-					  		<RowCat collectionID = {el.ID} key = {el.ID} name= {el.Name} refreshCollectionList = {this.refreshCollectionList} filter = {this.props.filter}/>
+					  		<RowCollection collectionID = {el.ID} key = {el.ID} name= {el.Name} refreshCollectionList = {this.refreshCollectionList} filter = {this.props.filter}/>
 							)
 					  }
 					</ul>
@@ -64,4 +63,4 @@ class ListCat extends React.Component {
 	}
 }
 
-export default ListCat;
+export default TableCollection;
